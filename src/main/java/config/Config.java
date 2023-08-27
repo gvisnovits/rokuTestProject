@@ -7,8 +7,6 @@ import java.io.File;
 public class Config {
 
     public static final boolean DEFAULT_AUTO_APPIUM_START = true;
-    //DEFAULT SETTINGS - MODIFY AS NEEDED
-    private static final Boolean DEFAULT_AUTO_EMULATOR_START = true;
     private static final String DEFAULT_APP_PATH = Channels.HELLO_WORLD.getChannelNameDirectory();
     private static final String DEFAULT_APP_NAME = Channels.HELLO_WORLD.getAppName();
 
