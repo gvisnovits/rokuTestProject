@@ -1,14 +1,15 @@
 package driver;
 
 import config.Config;
-import io.appium.java_client.AppiumDriver;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.io.IOException;
-
 @Log4j2
-public class RokuDriverFactory implements IDriverFactory{
+public class RokuDriverFactory {
+
+//    public WebDriver createDriver() throws IOException {
+//        return new WebDriver(new URL(Config.URL_STRING), getDesiredCapabilities());
+//    }
 
     private DesiredCapabilities getDesiredCapabilities() {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -24,13 +25,4 @@ public class RokuDriverFactory implements IDriverFactory{
         return caps;
     }
 
-    @Override
-    public AppiumDriver createDriver() throws IOException {
-        return null;
-    }
-
-    @Override
-    public void clean() {
-
-    }
 }

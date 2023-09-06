@@ -14,7 +14,7 @@ public class DriverFactory {
         try {
             log.info("App URL: " + Config.APP.getAbsolutePath());
             AppiumFactory.startAppium();
-            driverFactory = new RokuDriverFactory();
+            driverFactory = (IDriverFactory) new RokuDriverFactory();
             driver = driverFactory.createDriver();
             if (driver == null) throw new RuntimeException("Driver was not created!");
         } catch (Exception e) {
