@@ -4,12 +4,11 @@ public class Transcript {
     private String ip;
     private String sessionId;
     private String button;
+    private String channelId;
 
     public void setChannelId(String channelId) {
         this.channelId = channelId;
     }
-
-    private String channelId;
 
     public String getChannelId() {
         return channelId;
@@ -31,8 +30,12 @@ public class Transcript {
         this.sessionId = sessionId;
     }
 
-    public String setButton(String navigation) {
-        return this.button;
+    public void setButton(String button) {
+        this.button = button;
+    }
+
+    public String getButton() {
+        return button;
     }
 
 }

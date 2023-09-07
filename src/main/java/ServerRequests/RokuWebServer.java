@@ -40,4 +40,15 @@ public class RokuWebServer {
         return deleteResponse;
     }
 
+    public static HttpResponse<String> sendButtonRequest(String sessionId, HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest navigationRequest = HttpRequest.newBuilder()
+                .uri(new URI(String.format("http://127.0.0.1:9000/v1/session/%s/press", sessionId)))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
+                .build();
+        HttpResponse<String> navResponse = httpClient.send(navigationRequest, HttpResponse.BodyHandlers.ofString());
+        System.out.println("This is the navigation response: " + navResponse);
+        return navResponse;
+    }
+
 }
