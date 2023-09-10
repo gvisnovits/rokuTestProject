@@ -4,6 +4,7 @@ import ServerRequests.JsonBodyRequests.CreateSession;
 import ServerRequests.JsonBodyRequests.KeyPress;
 import ServerRequests.JsonBodyRequests.LaunchChannel;
 import ServerRequests.JsonBodyResponse.CreateSessionResponse;
+import ServerRequests.JsonBodyResponse.ElementActiveResponse;
 import ServerRequests.RokuWebServer;
 import com.google.gson.Gson;
 import config.Config;
@@ -45,5 +46,14 @@ public class RokuHelper {
     public void closeChannelSession(String sessionId) throws URISyntaxException, IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         RokuWebServer.getDeleteSession(sessionId, httpClient);
+    }
+
+    public void getFocusedElement(String sessionId) throws URISyntaxException, IOException, InterruptedException {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        Gson gson = new Gson();
+        HttpResponse<String> postResponse = RokuWebServer.getFocusedElement(sessionId, httpClient);
+        ElementActiveResponse elementActiveResponse = gson.fromJson(postResponse.body(), ElementActiveResponse.class);
+        String jsonResponseString = new Gson().toJson(elementActiveResponse);
+        System.out.println("Full Response body as string is: " + jsonResponseString);
     }
 }

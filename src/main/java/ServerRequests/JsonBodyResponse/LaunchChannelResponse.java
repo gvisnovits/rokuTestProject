@@ -4,6 +4,5 @@ public class LaunchChannelResponse {
 
     private String sessionId;
     private int status;
-    private Object value;
 
 }
