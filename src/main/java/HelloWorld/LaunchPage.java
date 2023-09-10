@@ -1,5 +1,6 @@
 package HelloWorld;
 
+import ServerRequests.ResponseCode;
 import helper.RokuHelper;
 
 import java.io.IOException;
@@ -14,6 +15,6 @@ public class LaunchPage {
         RokuHelper rokuHelper = new RokuHelper();
         HttpResponse<String> response = rokuHelper.getElementByText(sessionId, HelloWorld);
         int responseCode = rokuHelper.getStatusCode(response);
-        return responseCode == 0;
+        return responseCode == ResponseCode.SUCCESS.getCode();
     }
 }

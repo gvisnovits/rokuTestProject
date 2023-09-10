@@ -1,6 +1,6 @@
 package ServerRequests;
 
-public enum CommandResponses {
+public enum ResponseCode {
 
     SUCCESS(0, "Success", "The command executed successfully."),
     NO_SUCH_DRIVER(6, "No Such Driver", "A session is either terminated or not started"),
@@ -15,7 +15,7 @@ public enum CommandResponses {
     private String summary;
     private String detail;
 
-    CommandResponses(int code, String summary, String detail) {
+    ResponseCode(int code, String summary, String detail) {
         this.code = code;
         this.summary = summary;
         this.detail = detail;
