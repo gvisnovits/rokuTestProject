@@ -1,7 +1,8 @@
 package tests.helloworld;
 
+import HelloWorld.LaunchPage;
 import helper.RokuHelper;
-import helper.RokuNav;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,7 +10,11 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class RokuTestAutomation {
+public class HelloWorldTests {
+
+    /**
+     * 1. In Roku Device upload portal, upload zip to roku device before running tests.
+     */
 
     String sessionId;
 
@@ -28,11 +33,11 @@ public class RokuTestAutomation {
     }
 
     @Test
-    public void setupTests() throws Exception {
+    public void launchAndCheckHelloWorld() throws Exception {
         RokuHelper rokuHelper = new RokuHelper();
         rokuHelper.launchChannel(sessionId);
         Thread.sleep(3000);
-        rokuHelper.getFocusedElement(sessionId);
-        rokuHelper.sendButtonRequest(sessionId, RokuNav.DOWN);
+        LaunchPage launchPage = new LaunchPage();
+        Assert.assertTrue(launchPage.isHelloWorldDisplayed(sessionId), "Hello World text is not displayed.");
     }
 }

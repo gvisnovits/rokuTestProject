@@ -54,17 +54,14 @@ public class RokuWebServer {
         return httpClient.send(focusedElement, HttpResponse.BodyHandlers.ofString());
     }
 
-/*
-    public static HttpResponse<String> getElementByText(String sessionId, HttpClient httpClient, String jsonRequest) {
+    public static HttpResponse<String> getElement(String sessionId, HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
         HttpRequest navigationRequest = HttpRequest.newBuilder()
-                .uri(new URI(String.format("http://127.0.0.1:9000/v1/session/%s/press", sessionId)))
+                .uri(new URI(String.format("http://127.0.0.1:9000/v1/session/%s/element", sessionId)))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
         HttpResponse<String> navResponse = httpClient.send(navigationRequest, HttpResponse.BodyHandlers.ofString());
-        System.out.println("This is the navigation response: " + navResponse);
         return navResponse;
     }
-*/
 
 }

@@ -1,10 +1,13 @@
 package helper;
 
+import ServerRequests.ElementUsingEnum;
 import ServerRequests.JsonBodyRequests.CreateSession;
+import ServerRequests.JsonBodyRequests.ElementRequest;
 import ServerRequests.JsonBodyRequests.KeyPress;
 import ServerRequests.JsonBodyRequests.LaunchChannel;
+import ServerRequests.JsonBodyResponse.CommonResponses;
 import ServerRequests.JsonBodyResponse.CreateSessionResponse;
-import ServerRequests.JsonBodyResponse.ElementActiveResponse;
+import ServerRequests.JsonBodyResponse.ElementResponse;
 import ServerRequests.RokuWebServer;
 import com.google.gson.Gson;
 import config.Config;
@@ -52,8 +55,22 @@ public class RokuHelper {
         HttpClient httpClient = HttpClient.newHttpClient();
         Gson gson = new Gson();
         HttpResponse<String> postResponse = RokuWebServer.getFocusedElement(sessionId, httpClient);
-        ElementActiveResponse elementActiveResponse = gson.fromJson(postResponse.body(), ElementActiveResponse.class);
+        ElementResponse elementActiveResponse = gson.fromJson(postResponse.body(), ElementResponse.class);
         String jsonResponseString = new Gson().toJson(elementActiveResponse);
         System.out.println("Full Response body as string is: " + jsonResponseString);
+    }
+
+    public HttpResponse<String> getElementByText(String sessionId, String text) throws URISyntaxException, IOException, InterruptedException {
+        ElementRequest elementRequest = new ElementRequest(ElementUsingEnum.TEXT, text);
+        HttpClient httpClient = HttpClient.newHttpClient();
+        Gson gson = new Gson();
+        String jsonRequest = gson.toJson(elementRequest);
+        return RokuWebServer.getElement(sessionId, httpClient, jsonRequest);
+    }
+
+    public int getStatusCode(HttpResponse<String> jsonBodyResponse) {
+        Gson gson = new Gson();
+        CommonResponses commonResponses = gson.fromJson(jsonBodyResponse.body(), CommonResponses.class);
+        return commonResponses.getStatus();
     }
 }

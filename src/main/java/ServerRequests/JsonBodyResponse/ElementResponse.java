@@ -1,6 +1,6 @@
 package ServerRequests.JsonBodyResponse;
 
-public class ElementActiveResponse {
+public class ElementResponse {
     private String sessionId;
     private int status;
     private Value value;
