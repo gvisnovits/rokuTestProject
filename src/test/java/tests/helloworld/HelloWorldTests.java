@@ -34,7 +34,7 @@ public class HelloWorldTests {
     }
 
     @Test
-    public void launchAndCheckHelloWorld() throws Exception {
+    public void launchAndCheckHelloWorldUsingStatusCodes() throws Exception {
         RokuHelper rokuHelper = new RokuHelper();
         rokuHelper.launchChannel(sessionId);
         Thread.sleep(3000);
@@ -43,7 +43,7 @@ public class HelloWorldTests {
     }
 
     @Test
-    public void launchAndCheckHelloWorldXPath() throws URISyntaxException, IOException, InterruptedException, XPathExpressionException {
+    public void launchAndCheckHelloWorldUsingXPath() throws URISyntaxException, IOException, InterruptedException, XPathExpressionException {
         RokuHelper rokuHelper = new RokuHelper();
         rokuHelper.launchChannel(sessionId);
         Thread.sleep(3000);

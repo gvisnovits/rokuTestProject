@@ -21,9 +21,8 @@ public class XPathEvaluator {
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xpath = xPathFactory.newXPath();
         InputSource source = new InputSource(new StringReader(xml));
-        Boolean evaluation = (Boolean) xpath.compile(xpathExpression)
+        return (Boolean) xpath.compile(xpathExpression)
                 .evaluate(source, XPathConstants.BOOLEAN);
-        return evaluation;
     }
 
 }

@@ -77,7 +77,6 @@ public class RokuHelper {
 
     public String getPageXml(String sessionId) throws URISyntaxException, IOException, InterruptedException {
         String jsonResponse = getFocusedElement(sessionId);
-        String xml = JsonToXmlHelper.convertJsonToXml(jsonResponse);
-        return xml;
+        return JsonToXmlHelper.convertJsonToXml(jsonResponse);
     }
 }
