@@ -15,9 +15,7 @@ public class RokuWebServer {
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
-        HttpResponse<String> postResponse = httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Post response to launch the channel is: " + postResponse);
-        return postResponse;
+        return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
     }
 
     public static HttpResponse<String> getCreateSession(HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
@@ -26,8 +24,7 @@ public class RokuWebServer {
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
-        HttpResponse<String> postResponse = httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
-        return postResponse;
+        return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
     }
 
     public static HttpResponse<String> getDeleteSession(String sessionId, HttpClient httpClient) throws URISyntaxException, IOException, InterruptedException {
@@ -36,8 +33,7 @@ public class RokuWebServer {
                 .DELETE()
                 .build();
 
-        HttpResponse<String> deleteResponse = httpClient.send(deleteRequest, HttpResponse.BodyHandlers.ofString());
-        return deleteResponse;
+        return httpClient.send(deleteRequest, HttpResponse.BodyHandlers.ofString());
     }
 
     public static HttpResponse<String> sendButtonRequest(String sessionId, HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
@@ -46,8 +42,25 @@ public class RokuWebServer {
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
                 .build();
+        return httpClient.send(navigationRequest, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public static HttpResponse<String> getFocusedElement(String sessionid, HttpClient httpClient) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest focusedElement = (HttpRequest) HttpRequest.newBuilder()
+                .uri(new URI(String.format("http://127.0.0.1:9000/v1/session/%s/element/active", sessionid)))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(""))
+                .build();
+        return httpClient.send(focusedElement, HttpResponse.BodyHandlers.ofString());
+    }
+
+    public static HttpResponse<String> getElement(String sessionId, HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
+        HttpRequest navigationRequest = HttpRequest.newBuilder()
+                .uri(new URI(String.format("http://127.0.0.1:9000/v1/session/%s/element", sessionId)))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
+                .build();
         HttpResponse<String> navResponse = httpClient.send(navigationRequest, HttpResponse.BodyHandlers.ofString());
-        System.out.println("This is the navigation response: " + navResponse);
         return navResponse;
     }
 

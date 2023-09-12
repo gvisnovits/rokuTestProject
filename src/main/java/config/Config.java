@@ -20,7 +20,7 @@ public class Config {
     public static final String ROKU_WEB_PORT = "80";
     public static final String ROKU_USER = "rokudev";
     public static final String ROKU_PASSWORD = "passwordGoesHere";
-    public static final String ROKU_IP = "192.168.68.52";
+    public static final String ROKU_IP = "192.168.68.67";
 
     //Logging
     public static final File LOGS_DIR = new File("target/logs");
