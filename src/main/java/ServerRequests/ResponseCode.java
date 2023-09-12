@@ -11,9 +11,9 @@ public enum ResponseCode {
     INVALID_SELECTOR(32, "Invalid Selector", "Argument was an invalid selector."),
     SESSION_NOT_CREATED_EXCEPTION(33, "Session Not Created Exception", "A new session could not be created.");
 
-    private int code;
-    private String summary;
-    private String detail;
+    private final int code;
+    private final String summary;
+    private final String detail;
 
     ResponseCode(int code, String summary, String detail) {
         this.code = code;

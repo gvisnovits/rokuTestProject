@@ -51,13 +51,14 @@ public class RokuHelper {
         RokuWebServer.getDeleteSession(sessionId, httpClient);
     }
 
-    public void getFocusedElement(String sessionId) throws URISyntaxException, IOException, InterruptedException {
+    public String getFocusedElement(String sessionId) throws URISyntaxException, IOException, InterruptedException {
         HttpClient httpClient = HttpClient.newHttpClient();
         Gson gson = new Gson();
         HttpResponse<String> postResponse = RokuWebServer.getFocusedElement(sessionId, httpClient);
         ElementResponse elementActiveResponse = gson.fromJson(postResponse.body(), ElementResponse.class);
         String jsonResponseString = new Gson().toJson(elementActiveResponse);
         System.out.println("Full Response body as string is: " + jsonResponseString);
+        return jsonResponseString;
     }
 
     public HttpResponse<String> getElementByText(String sessionId, String text) throws URISyntaxException, IOException, InterruptedException {
@@ -72,5 +73,11 @@ public class RokuHelper {
         Gson gson = new Gson();
         CommonResponses commonResponses = gson.fromJson(jsonBodyResponse.body(), CommonResponses.class);
         return commonResponses.getStatus();
+    }
+
+    public String getPageXml(String sessionId) throws URISyntaxException, IOException, InterruptedException {
+        String jsonResponse = getFocusedElement(sessionId);
+        String xml = JsonToXmlHelper.convertJsonToXml(jsonResponse);
+        return xml;
     }
 }

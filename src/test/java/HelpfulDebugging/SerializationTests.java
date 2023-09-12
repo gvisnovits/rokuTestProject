@@ -8,8 +8,8 @@ import com.google.gson.Gson;
 public class SerializationTests {
 
     public static void main(String[] args) {
-//        serializeExample();
-        deserializeExample();
+        serializeExample();
+//        deserializeExample();
     }
 
     private static void serializeExample() {
