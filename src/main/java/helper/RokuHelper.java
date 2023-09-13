@@ -12,14 +12,12 @@ import serverrequests.jsonbodyresponse.CommonResponses;
 import serverrequests.jsonbodyresponse.CreateSessionResponse;
 import serverrequests.jsonbodyresponse.ElementResponse;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpResponse;
 
 public class RokuHelper {
 
-	public String createAndGetSessionId() throws URISyntaxException, IOException, InterruptedException {
+	public String createAndGetSessionId() {
 		CreateSession createSession = new CreateSession(Config.ROKU_IP);
 		Gson gson = new Gson();
 		HttpClient httpClient = HttpClient.newHttpClient();
@@ -29,7 +27,7 @@ public class RokuHelper {
 		return createSessionResponse.getSessionId();
 	}
 
-	public void launchChannel(String sessionId) throws URISyntaxException, IOException, InterruptedException {
+	public void launchChannel(String sessionId) {
 		LaunchChannel launchChannel = new LaunchChannel("dev");
 		Gson gson = new Gson();
 		String jsonRequest = gson.toJson(launchChannel);
@@ -37,7 +35,7 @@ public class RokuHelper {
 		RokuWebServer.launchChannel(httpClient, sessionId, jsonRequest);
 	}
 
-	public void sendButtonRequest(String sessionId, RokuNav rokuNav) throws URISyntaxException, IOException, InterruptedException {
+	public void sendButtonRequest(String sessionId, RokuNav rokuNav) {
 		KeyPress keyPress = new KeyPress(rokuNav.getNavigation());
 		Gson gson = new Gson();
 		HttpClient httpClient = HttpClient.newHttpClient();
@@ -45,12 +43,16 @@ public class RokuHelper {
 		RokuWebServer.sendButtonRequest(sessionId, httpClient, jsonRequest);
 	}
 
-	public void closeChannelSession(String sessionId) throws URISyntaxException, IOException, InterruptedException {
-		HttpClient httpClient = HttpClient.newHttpClient();
-		RokuWebServer.deleteSession(sessionId, httpClient);
+	public void closeChannelSession(String sessionId) {
+		try {
+			HttpClient httpClient = HttpClient.newHttpClient();
+			RokuWebServer.deleteSession(sessionId, httpClient);
+		} catch (Exception e) {
+			System.out.println("Caught an exception");
+		}
 	}
 
-	public String getFocusedElement(String sessionId) throws URISyntaxException, IOException, InterruptedException {
+	public String getFocusedElement(String sessionId) {
 		Gson gson = new Gson();
 		HttpClient httpClient = HttpClient.newHttpClient();
 		HttpResponse<String> postResponse = RokuWebServer.getFocusedElement(sessionId, httpClient);
@@ -58,7 +60,7 @@ public class RokuHelper {
 		return new Gson().toJson(elementActiveResponse);
 	}
 
-	public HttpResponse<String> getElementByText(String sessionId, String text) throws URISyntaxException, IOException, InterruptedException {
+	public HttpResponse<String> getElementByText(String sessionId, String text) {
 		ElementRequest elementRequest = new ElementRequest(LocatorStrategy.TEXT, text);
 		Gson gson = new Gson();
 		HttpClient httpClient = HttpClient.newHttpClient();
@@ -72,7 +74,7 @@ public class RokuHelper {
 		return commonResponses.getStatus();
 	}
 
-	public String getPageXml(String sessionId) throws URISyntaxException, IOException, InterruptedException {
+	public String getPageXml(String sessionId) {
 		String jsonResponse = getFocusedElement(sessionId);
 		return JsonToXmlHelper.convertJsonToXml(jsonResponse);
 	}
