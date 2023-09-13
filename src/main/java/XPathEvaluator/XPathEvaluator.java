@@ -10,19 +10,19 @@ import java.io.StringReader;
 
 public class XPathEvaluator {
 
-    public static String xPathEvaluator(String xml, String xpathExpression) throws XPathExpressionException {
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xpath = xPathFactory.newXPath();
-        InputSource source = new InputSource(new StringReader(xml));
-        return xpath.evaluate(xpathExpression, source);
-    }
+	public static String xPathEvaluator(String xml, String xpathExpression) throws XPathExpressionException {
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xpath = xPathFactory.newXPath();
+		InputSource source = new InputSource(new StringReader(xml));
+		return xpath.evaluate(xpathExpression, source);
+	}
 
-    public static Boolean isDisplayed(String xml, String xpathExpression) throws XPathExpressionException {
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xpath = xPathFactory.newXPath();
-        InputSource source = new InputSource(new StringReader(xml));
-        return (Boolean) xpath.compile(xpathExpression)
-                .evaluate(source, XPathConstants.BOOLEAN);
-    }
+	public static Boolean isDisplayed(String xml, String xpathExpression) throws XPathExpressionException {
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xpath = xPathFactory.newXPath();
+		InputSource source = new InputSource(new StringReader(xml));
+		return (Boolean) xpath.compile(xpathExpression)
+				.evaluate(source, XPathConstants.BOOLEAN);
+	}
 
 }

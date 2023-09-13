@@ -13,41 +13,41 @@ import java.net.URISyntaxException;
 
 public class HelloWorldTests {
 
-    /**
-     * 1. In Roku Device upload portal, upload zip to roku device before running tests.
-     */
+	/**
+	 * 1. In Roku Device upload portal, upload zip to roku device before running tests.
+	 */
 
-    String sessionId;
+	String sessionId;
 
-    @BeforeMethod
-    public String createSession() throws URISyntaxException, IOException, InterruptedException {
-        RokuHelper rokuHelper = new RokuHelper();
-        sessionId = rokuHelper.createAndGetSessionId();
-        System.out.println("SessionId is: " + sessionId);
-        return sessionId;
-    }
+	@BeforeMethod
+	public String createSession() throws URISyntaxException, IOException, InterruptedException {
+		RokuHelper rokuHelper = new RokuHelper();
+		sessionId = rokuHelper.createAndGetSessionId();
+		System.out.println("SessionId is: " + sessionId);
+		return sessionId;
+	}
 
-    @AfterMethod
-    public void tearDown() throws URISyntaxException, IOException, InterruptedException {
-        RokuHelper rokuHelper = new RokuHelper();
-        rokuHelper.closeChannelSession(sessionId);
-    }
+	@AfterMethod
+	public void tearDown() throws URISyntaxException, IOException, InterruptedException {
+		RokuHelper rokuHelper = new RokuHelper();
+		rokuHelper.closeChannelSession(sessionId);
+	}
 
-    @Test
-    public void launchAndCheckHelloWorldUsingStatusCodes() throws Exception {
-        RokuHelper rokuHelper = new RokuHelper();
-        rokuHelper.launchChannel(sessionId);
-        Thread.sleep(3000);
-        LaunchPage launchPage = new LaunchPage();
-        Assert.assertTrue(launchPage.isHelloWorldDisplayedWithStatusCode(sessionId), "Hello World text is not displayed.");
-    }
+	@Test
+	public void launchAndCheckHelloWorldUsingStatusCodes() throws Exception {
+		RokuHelper rokuHelper = new RokuHelper();
+		rokuHelper.launchChannel(sessionId);
+		Thread.sleep(3000);
+		LaunchPage launchPage = new LaunchPage();
+		Assert.assertTrue(launchPage.isHelloWorldDisplayedWithStatusCode(sessionId), "Hello World text is not displayed.");
+	}
 
-    @Test
-    public void launchAndCheckHelloWorldUsingXPath() throws URISyntaxException, IOException, InterruptedException, XPathExpressionException {
-        RokuHelper rokuHelper = new RokuHelper();
-        rokuHelper.launchChannel(sessionId);
-        Thread.sleep(3000);
-        LaunchPage launchPage = new LaunchPage();
-        Assert.assertTrue(launchPage.isHelloWorlddisplayedUsingXpath(sessionId), "Hello World is not displayed");
-    }
+	@Test
+	public void launchAndCheckHelloWorldUsingXPath() throws URISyntaxException, IOException, InterruptedException, XPathExpressionException {
+		RokuHelper rokuHelper = new RokuHelper();
+		rokuHelper.launchChannel(sessionId);
+		Thread.sleep(3000);
+		LaunchPage launchPage = new LaunchPage();
+		Assert.assertTrue(launchPage.isHelloWorlddisplayedUsingXpath(sessionId), "Hello World is not displayed");
+	}
 }
