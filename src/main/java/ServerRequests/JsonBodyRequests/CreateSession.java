@@ -2,9 +2,9 @@ package ServerRequests.JsonBodyRequests;
 
 public class CreateSession {
 
-    private String ip;
+	private String ip;
 
-    public CreateSession(String ip) {
-        this.ip = ip;
-    }
+	public CreateSession(String ip) {
+		this.ip = ip;
+	}
 }

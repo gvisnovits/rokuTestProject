@@ -1,17 +1,17 @@
 package ServerRequests;
 
 public enum ElementUsingEnum {
-    TEXT("text"),
-    ATTR("attr"),
-    TAG("tag");
+	TEXT("text"),
+	ATTR("attr"),
+	TAG("tag");
 
-    private String using;
+	private String using;
 
-    ElementUsingEnum(String using) {
-        this.using = using;
-    }
+	ElementUsingEnum(String using) {
+		this.using = using;
+	}
 
-    public String getUsing() {
-        return using;
-    }
+	public String getUsing() {
+		return using;
+	}
 }
