@@ -16,7 +16,7 @@ public class XmlDebugging {
 		String json = "";
 		String xmlReturn = JsonToXmlHelper.convertJsonToXml(json);
 		System.out.println(xmlReturn);
-        returnString(xmlReturn);
+		returnString(xmlReturn);
 		booleanTest(xmlReturn);
 
 	}

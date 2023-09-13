@@ -9,7 +9,7 @@ public class SerializationDebugging {
 
 	public static void main(String[] args) {
 		serializeExample();
-        deserializeExample();
+		deserializeExample();
 	}
 
 	/**
