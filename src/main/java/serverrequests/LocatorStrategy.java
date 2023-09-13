@@ -1,13 +1,13 @@
-package ServerRequests;
+package serverrequests;
 
-public enum ElementUsingEnum {
+public enum LocatorStrategy {
 	TEXT("text"),
 	ATTR("attr"),
 	TAG("tag");
 
 	private String using;
 
-	ElementUsingEnum(String using) {
+	LocatorStrategy(String using) {
 		this.using = using;
 	}
 

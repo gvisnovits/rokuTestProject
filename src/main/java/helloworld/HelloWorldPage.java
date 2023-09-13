@@ -1,15 +1,15 @@
-package HelloWorld;
+package helloworld;
 
-import ServerRequests.ResponseCode;
-import XPathEvaluator.XPathEvaluator;
 import helper.RokuHelper;
+import serverrequests.ResponseCode;
+import xpathevaluator.XPathEvaluator;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.http.HttpResponse;
 
-public class LaunchPage {
+public class HelloWorldPage {
 
 	private String helloWorld = "Hello World!";
 	private String helloWorldXpath = "//Value[contains(string(), 'Hello World!')]";

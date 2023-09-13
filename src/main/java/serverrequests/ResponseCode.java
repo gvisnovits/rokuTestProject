@@ -1,4 +1,4 @@
-package ServerRequests;
+package serverrequests;
 
 public enum ResponseCode {
 

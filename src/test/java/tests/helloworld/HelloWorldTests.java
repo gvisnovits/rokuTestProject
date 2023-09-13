@@ -1,6 +1,6 @@
 package tests.helloworld;
 
-import HelloWorld.LaunchPage;
+import helloworld.HelloWorldPage;
 import helper.RokuHelper;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -38,8 +38,8 @@ public class HelloWorldTests {
 		RokuHelper rokuHelper = new RokuHelper();
 		rokuHelper.launchChannel(sessionId);
 		Thread.sleep(3000);
-		LaunchPage launchPage = new LaunchPage();
-		Assert.assertTrue(launchPage.isHelloWorldDisplayedWithStatusCode(sessionId), "Hello World text is not displayed.");
+		HelloWorldPage helloWorldPage = new HelloWorldPage();
+		Assert.assertTrue(helloWorldPage.isHelloWorldDisplayedWithStatusCode(sessionId), "Hello World text is not displayed.");
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public class HelloWorldTests {
 		RokuHelper rokuHelper = new RokuHelper();
 		rokuHelper.launchChannel(sessionId);
 		Thread.sleep(3000);
-		LaunchPage launchPage = new LaunchPage();
-		Assert.assertTrue(launchPage.isHelloWorlddisplayedUsingXpath(sessionId), "Hello World is not displayed");
+		HelloWorldPage helloWorldPage = new HelloWorldPage();
+		Assert.assertTrue(helloWorldPage.isHelloWorlddisplayedUsingXpath(sessionId), "Hello World is not displayed");
 	}
 }

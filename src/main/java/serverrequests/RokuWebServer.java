@@ -1,4 +1,4 @@
-package ServerRequests;
+package serverrequests;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,7 +18,7 @@ public class RokuWebServer {
 		return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
 	}
 
-	public static HttpResponse<String> getCreateSession(HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
+	public static HttpResponse<String> createSession(HttpClient httpClient, String jsonRequest) throws URISyntaxException, IOException, InterruptedException {
 		HttpRequest postRequest = HttpRequest.newBuilder()
 				.uri(new URI("http://127.0.0.1:9000/v1/session"))
 				.header("Content-Type", "application/json")
@@ -27,7 +27,7 @@ public class RokuWebServer {
 		return httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
 	}
 
-	public static HttpResponse<String> getDeleteSession(String sessionId, HttpClient httpClient) throws URISyntaxException, IOException, InterruptedException {
+	public static HttpResponse<String> deleteSession(String sessionId, HttpClient httpClient) throws URISyntaxException, IOException, InterruptedException {
 		HttpRequest deleteRequest = HttpRequest.newBuilder()
 				.uri(new URI(String.format("http://127.0.0.1:9000/v1/session/%s", sessionId)))
 				.DELETE()
@@ -60,8 +60,7 @@ public class RokuWebServer {
 				.header("Content-Type", "application/json")
 				.POST(HttpRequest.BodyPublishers.ofString(jsonRequest))
 				.build();
-		HttpResponse<String> navResponse = httpClient.send(navigationRequest, HttpResponse.BodyHandlers.ofString());
-		return navResponse;
+		return httpClient.send(navigationRequest, HttpResponse.BodyHandlers.ofString());
 	}
 
 }
