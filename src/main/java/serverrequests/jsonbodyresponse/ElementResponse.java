@@ -1,17 +1,7 @@
-package ServerRequests.JsonBodyResponse;
+package serverrequests.jsonbodyresponse;
 
-public class ElementResponse {
-	private String sessionId;
-	private int status;
+public class ElementResponse extends CommonResponses {
 	private Value value;
-
-	public String getSessionId() {
-		return sessionId;
-	}
-
-	public int getStatus() {
-		return status;
-	}
 
 	public Value getValue() {
 		return value;

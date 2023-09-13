@@ -1,6 +1,6 @@
-package ServerRequests.JsonBodyRequests;
+package serverrequests.jsonbodyrequests;
 
-import ServerRequests.ElementUsingEnum;
+import serverrequests.LocatorStrategy;
 
 public class ElementRequest {
 
@@ -12,8 +12,8 @@ public class ElementRequest {
 	 * "using": "text"
 	 * "value": "Text String"
 	 */
-	public ElementRequest(ElementUsingEnum elementUsingEnum, String value) {
-		this.elementData = new ElementData[]{new ElementData(elementUsingEnum, value)};
+	public ElementRequest(LocatorStrategy locatorStrategy, String value) {
+		this.elementData = new ElementData[]{new ElementData(locatorStrategy, value)};
 	}
 
 	private class ElementData {
@@ -33,8 +33,8 @@ public class ElementRequest {
 			return attribute;
 		}
 
-		public ElementData(ElementUsingEnum elementUsingEnum, String value) {
-			this.using = elementUsingEnum.getUsing();
+		public ElementData(LocatorStrategy locatorStrategy, String value) {
+			this.using = locatorStrategy.getUsing();
 			this.value = value;
 		}
 

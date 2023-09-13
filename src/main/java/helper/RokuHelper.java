@@ -1,16 +1,16 @@
 package helper;
 
-import ServerRequests.ElementUsingEnum;
-import ServerRequests.JsonBodyRequests.CreateSession;
-import ServerRequests.JsonBodyRequests.ElementRequest;
-import ServerRequests.JsonBodyRequests.KeyPress;
-import ServerRequests.JsonBodyRequests.LaunchChannel;
-import ServerRequests.JsonBodyResponse.CommonResponses;
-import ServerRequests.JsonBodyResponse.CreateSessionResponse;
-import ServerRequests.JsonBodyResponse.ElementResponse;
-import ServerRequests.RokuWebServer;
 import com.google.gson.Gson;
 import config.Config;
+import serverrequests.LocatorStrategy;
+import serverrequests.RokuWebServer;
+import serverrequests.jsonbodyrequests.CreateSession;
+import serverrequests.jsonbodyrequests.ElementRequest;
+import serverrequests.jsonbodyrequests.KeyPress;
+import serverrequests.jsonbodyrequests.LaunchChannel;
+import serverrequests.jsonbodyresponse.CommonResponses;
+import serverrequests.jsonbodyresponse.CreateSessionResponse;
+import serverrequests.jsonbodyresponse.ElementResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -22,9 +22,9 @@ public class RokuHelper {
 	public String createAndGetSessionId() throws URISyntaxException, IOException, InterruptedException {
 		CreateSession createSession = new CreateSession(Config.ROKU_IP);
 		Gson gson = new Gson();
-		String jsonRequest = gson.toJson(createSession);
 		HttpClient httpClient = HttpClient.newHttpClient();
-		HttpResponse<String> postResponse = RokuWebServer.getCreateSession(httpClient, jsonRequest);
+		String jsonRequest = gson.toJson(createSession);
+		HttpResponse<String> postResponse = RokuWebServer.createSession(httpClient, jsonRequest);
 		CreateSessionResponse createSessionResponse = gson.fromJson(postResponse.body(), CreateSessionResponse.class);
 		return createSessionResponse.getSessionId();
 	}
@@ -42,29 +42,26 @@ public class RokuHelper {
 		Gson gson = new Gson();
 		HttpClient httpClient = HttpClient.newHttpClient();
 		String jsonRequest = gson.toJson(keyPress);
-		System.out.println("Print of jsonRequest for Nav is: " + jsonRequest);
 		RokuWebServer.sendButtonRequest(sessionId, httpClient, jsonRequest);
 	}
 
 	public void closeChannelSession(String sessionId) throws URISyntaxException, IOException, InterruptedException {
 		HttpClient httpClient = HttpClient.newHttpClient();
-		RokuWebServer.getDeleteSession(sessionId, httpClient);
+		RokuWebServer.deleteSession(sessionId, httpClient);
 	}
 
 	public String getFocusedElement(String sessionId) throws URISyntaxException, IOException, InterruptedException {
-		HttpClient httpClient = HttpClient.newHttpClient();
 		Gson gson = new Gson();
+		HttpClient httpClient = HttpClient.newHttpClient();
 		HttpResponse<String> postResponse = RokuWebServer.getFocusedElement(sessionId, httpClient);
 		ElementResponse elementActiveResponse = gson.fromJson(postResponse.body(), ElementResponse.class);
-		String jsonResponseString = new Gson().toJson(elementActiveResponse);
-		System.out.println("Full Response body as string is: " + jsonResponseString);
-		return jsonResponseString;
+		return new Gson().toJson(elementActiveResponse);
 	}
 
 	public HttpResponse<String> getElementByText(String sessionId, String text) throws URISyntaxException, IOException, InterruptedException {
-		ElementRequest elementRequest = new ElementRequest(ElementUsingEnum.TEXT, text);
-		HttpClient httpClient = HttpClient.newHttpClient();
+		ElementRequest elementRequest = new ElementRequest(LocatorStrategy.TEXT, text);
 		Gson gson = new Gson();
+		HttpClient httpClient = HttpClient.newHttpClient();
 		String jsonRequest = gson.toJson(elementRequest);
 		return RokuWebServer.getElement(sessionId, httpClient, jsonRequest);
 	}

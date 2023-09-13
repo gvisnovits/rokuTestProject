@@ -1,4 +1,4 @@
-package ServerRequests.JsonBodyRequests;
+package serverrequests.jsonbodyrequests;
 
 public class LaunchChannel {
 
