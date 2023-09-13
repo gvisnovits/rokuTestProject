@@ -49,6 +49,5 @@ public class HelloWorldTests {
 		Thread.sleep(3000);
 		LaunchPage launchPage = new LaunchPage();
 		Assert.assertTrue(launchPage.isHelloWorlddisplayedUsingXpath(sessionId), "Hello World is not displayed");
-		Assert.assertTrue(launchPage.isHelloWorlddisplayedUsingXpath(sessionId), "Hello World is not displayed");
 	}
 }
