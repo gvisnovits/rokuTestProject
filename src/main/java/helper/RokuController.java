@@ -1,6 +1,6 @@
 package helper;
 
-public enum RokuNav {
+public enum RokuController {
 
 	UP("up"),
 	DOWN("down"),
@@ -10,7 +10,7 @@ public enum RokuNav {
 
 	private final String navigation;
 
-	RokuNav(String navigation) {
+	RokuController(String navigation) {
 		this.navigation = navigation;
 	}
 

@@ -13,9 +13,9 @@ public class XPathEvaluator {
 	public static String getText(String xml, String xpathExpression) {
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xpath = xPathFactory.newXPath();
-		InputSource source = new InputSource(new StringReader(xml));
+		InputSource xmlFile = new InputSource(new StringReader(xml));
 		try {
-			return xpath.evaluate(xpathExpression, source);
+			return xpath.evaluate(xpathExpression, xmlFile);
 		} catch (XPathExpressionException e) {
 			throw new RuntimeException(e);
 		}
@@ -24,10 +24,10 @@ public class XPathEvaluator {
 	public static Boolean isDisplayed(String xml, String xpathExpression) {
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xpath = xPathFactory.newXPath();
-		InputSource source = new InputSource(new StringReader(xml));
+		InputSource xmlFile = new InputSource(new StringReader(xml));
 		try {
 			return (Boolean) xpath.compile(xpathExpression)
-					.evaluate(source, XPathConstants.BOOLEAN);
+					.evaluate(xmlFile, XPathConstants.BOOLEAN);
 		} catch (XPathExpressionException e) {
 			throw new RuntimeException(e);
 		}

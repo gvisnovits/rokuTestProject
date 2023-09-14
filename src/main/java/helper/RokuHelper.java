@@ -35,8 +35,8 @@ public class RokuHelper {
 		RokuWebServer.launchChannel(httpClient, sessionId, jsonRequest);
 	}
 
-	public void sendButtonRequest(String sessionId, RokuNav rokuNav) {
-		KeyPress keyPress = new KeyPress(rokuNav.getNavigation());
+	public void sendButtonRequest(String sessionId, RokuController rokuController) {
+		KeyPress keyPress = new KeyPress(rokuController.getNavigation());
 		Gson gson = new Gson();
 		HttpClient httpClient = HttpClient.newHttpClient();
 		String jsonRequest = gson.toJson(keyPress);

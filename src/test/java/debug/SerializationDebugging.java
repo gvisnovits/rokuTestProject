@@ -21,7 +21,6 @@ public class SerializationDebugging {
 		Gson gson = new Gson();
 		gson.toJson(elementRequest);
 		String json = gson.toJson(elementRequest);
-		System.out.println(json);
 	}
 
 	/**
