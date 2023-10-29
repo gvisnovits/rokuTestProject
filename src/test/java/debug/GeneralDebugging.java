@@ -1,5 +1,6 @@
 package debug;
 
+import config.Config;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GeneralDebugging {
 
-	private static final File location = new File("/Users/gvisnovits/Documents/Code/rokuTestProject/src");
+	private static final File location = new File(String.format(Config.LOCAL_USER_DIR + "/src"));
 	private static final String command = "go run .";
 	private static final String shell = "sh";
 	private static final String terminalCommand = "-c";
@@ -41,7 +42,7 @@ public class GeneralDebugging {
 		System.out.println("Command: " + command);
 
 		builder.directory(whereToRun);
-		builder.command(shell, terminalCommand, command);
+//		builder.command(shell, terminalCommand, command);
 
 
 		OutputStream outputStream = process.getOutputStream();
